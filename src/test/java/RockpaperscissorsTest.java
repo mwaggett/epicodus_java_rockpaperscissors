@@ -36,7 +36,7 @@ public class RockpaperscissorsTest extends FluentTest {
   @Test
   public void checkWinner_takesCapitalizedInput_true() {
     Rockpaperscissors rps = new Rockpaperscissors();
-    Boolean expValue = true;
+    Boolean expValue = false;
     assertEquals(expValue, rps.checkWinner("PapeR","Rock"));
   }
 
