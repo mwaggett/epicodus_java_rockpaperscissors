@@ -8,7 +8,15 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RockpaperscissorsTest  {
+public class RockpaperscissorsTest extends FluentTest {
+
+  public WebDriver webDriver = new HtmlUnitDriver();
+  public WebDriver getDefaultDriver() {
+      return webDriver;
+  }
+
+  @ClassRule
+  public static ServerRule server = new ServerRule();
 
 
   @Test
@@ -46,24 +54,31 @@ public class RockpaperscissorsTest  {
     assertEquals(expValue, rps.checkInput("90 cAtS !! :)"));
   }
 
+
+
+
   @Test
-  public void checkWinnerVsComputer_ComputerRandom() {
-    Rockpaperscissors rps = new Rockpaperscissors();
-    Boolean expValue = true;
-    assertEquals(expValue, rps.checkWinnerVsComputer("rock"));
+  public void rootTest() {
+      goTo("http://localhost:4567/");
+      assertThat(pageSource()).contains("Play Rock");
   }
 
-  // public WebDriver webDriver = new HtmlUnitDriver();
-  // public WebDriver getDefaultDriver() {
-  //     return webDriver;
-  // }
-  //
-  // @ClassRule
-  // public static ServerRule server = new ServerRule();
-  //
-  // @Test
-  // public void rootTest() {
-  //     goTo("http://localhost:4567/");
-  //     assertThat(pageSource()).contains("Leap year detector");
-  // }
+  @Test
+  public void playerChoice_goesToPlayerVsPlayer() {
+    goTo("http://localhost:4567/");
+    find("#choiceplayer").click();
+    submit(".btn");
+    assertThat(pageSource()).contains("Play Rock Paper Scissors with a friend!");
+  }
+
+  @Test
+  public void playerVsPlayer_player1Wins() {
+    goTo("http://localhost:4567/play?choice=player");
+    fill("#player1").with("rock");
+    fill("#player2").with("scissors");
+    submit(".btn");
+    assertThat(pageSource()).contains("Player 1 wins");
+  }
+
+
 }
