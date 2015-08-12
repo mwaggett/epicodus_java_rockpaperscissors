@@ -1,9 +1,11 @@
 <h1>Play Rock Paper Scissors!</h1>
-<form  action='/results'>
+
+<form  action='/play'>
   <div class='form-group'>
-    <label for='player'> Rock, Paper, or Scissors?: </label>
-    <input type="text" name="player" id="player" class="form-control">
+    <label for='choice'>Would you like to play with a computer or with a friend?</label>
+    <input type="radio" name="choice" id="choice" value="computer" class="form-control">
+    <input type="radio" name="choice" id="choice" value="player" class="form-control">
   </div>
 
-<button type="submit" class='btn'> Play!!</button>
+<button type="submit" class='btn'>Let's play!</button>
 </form>
