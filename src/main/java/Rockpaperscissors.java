@@ -20,15 +20,43 @@ public class Rockpaperscissors {
 
     }, new VelocityTemplateEngine());
 
-    get("/results", (request, response) -> {
+    get("/play", (request, response) -> {
       HashMap model = new HashMap();
-      model.put("template", "templates/results.vtl");
+
+      String choice = request.queryParams("choice");
+      if (choice.equals("computer")) {
+        model.put("template", "templates/playervscomputer.vtl");
+      } else {
+        model.put("template", "templates/playervsplayer.vtl");
+      }
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/results_computer", (request, response) -> {
+      HashMap model = new HashMap();
+      model.put("template", "templates/results_computer.vtl");
 
       String player = request.queryParams("player");
       model.put("player", player);
       String computer = computerOutput();
       model.put("computer", computer);
       Boolean output = checkWinner(player, computer);
+
+      model.put("output", output);
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/results_player", (request, response) -> {
+      HashMap model = new HashMap();
+      model.put("template", "templates/results_player.vtl");
+
+      String player1 = request.queryParams("player1");
+      model.put("player1", player1);
+      String player2 = request.queryParams("player2");
+      model.put("player2", player2);
+      Boolean output = checkWinner(player1, player2);
 
       model.put("output", output);
 
