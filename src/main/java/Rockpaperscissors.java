@@ -41,9 +41,14 @@ public class Rockpaperscissors {
       model.put("player", player);
       String computer = computerOutput();
       model.put("computer", computer);
-      Boolean output = checkWinner(player, computer);
-
-      model.put("output", output);
+      Boolean inputCheck = true;
+      if (checkInput(player).equals("no")){
+        inputCheck = false;
+      } else {
+        Boolean output = checkWinner(player, computer);
+        model.put("output", output);
+      }
+      model.put("inputCheck", inputCheck);
 
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -56,9 +61,14 @@ public class Rockpaperscissors {
       model.put("player1", player1);
       String player2 = request.queryParams("player2");
       model.put("player2", player2);
-      Boolean output = checkWinner(player1, player2);
-
-      model.put("output", output);
+      Boolean inputCheck = true;
+      if (checkInput(player1).equals("no") || checkInput(player2).equals("no")){
+        inputCheck = false;
+      } else {
+        Boolean output = checkWinner(player1, player2);
+        model.put("output", output);
+      }
+      model.put("inputCheck", inputCheck);
 
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -87,7 +97,6 @@ public class Rockpaperscissors {
       return player;
       }
     else {
-      System.out.println("Bad input.  Please enter rock, scissors, or paper.");
       return "no";
     }
   }

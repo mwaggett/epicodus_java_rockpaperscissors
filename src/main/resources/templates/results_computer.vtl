@@ -1,6 +1,8 @@
 <h1>Rock Paper Scissors Results</h1>
 <p>Computer chose $computer and player chose $player.</p>
-#if($output)
+#if(!$inputCheck)
+  <p>Not valid inputs.  No one wins.</p>
+#elseif($output)
   <p>You win! :)</p>
 #elseif($computer == $player)
   <p>You tied!</p>
