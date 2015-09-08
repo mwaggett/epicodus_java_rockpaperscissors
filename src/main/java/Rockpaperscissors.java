@@ -90,9 +90,7 @@ public class Rockpaperscissors {
   }
 
   public static String checkInput(String player){
-    System.out.println(player);
     player = player.toLowerCase();
-    System.out.println(player);
     if (player.equals("rock") || player.equals("scissors") || player.equals("paper")){
       return player;
       }
@@ -100,22 +98,6 @@ public class Rockpaperscissors {
       return "no";
     }
   }
-
-  // public static Boolean checkWinnerVsComputer(String player) {
-  //   player = checkInput(player);
-  //
-  //
-  //   if ((player.equals("rock") && computer.equals(0)) ||
-  //       (player.equals("scissors") && computer.equals(1)) ||
-  //       (player.equals("paper") && computer.equals(2))) {
-  //         System.out.println("Player said "+ player + ". Computer said "+computer+".");
-  //         return true;
-  //   } else {
-  //     System.out.println("Player said "+ player + ". Computer said "+computer+".");
-  //         return false;
-  //   }
-  //
-  // }
 
   public static String computerOutput() {
     Random randomGen = new Random();
